@@ -1,13 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+
+
+import firebase from 'firebase';
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,12 +16,21 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  //connecting to firebase:
+    componentWillMount(){
+      firebase.initializeApp({
+        apiKey: "AIzaSyAs45Z-nz500xR5kTzNhUbpigkM8jFf_IQ",
+        authDomain: "crm-app-534fe.firebaseapp.com",
+        databaseURL: "https://crm-app-534fe.firebaseio.com",
+        projectId: "crm-app-534fe",
+        storageBucket: "",
+        messagingSenderId: "770405435492"
+      })
+    }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <Text style={styles.welcome}>Welcome to CRM</Text>
       </View>
     );
   }
