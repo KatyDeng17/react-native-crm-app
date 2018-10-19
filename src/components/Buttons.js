@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+// import firebase from 'firebase';
 
 export default class Buttons extends Component {
-  onButtonPress=()=> {
-    alert('Button is clicked....')
-  }
+
+  
   render(){
     const {button, buttonText} = styles
     return(
-         <TouchableOpacity onPress = {this.onButtonPress} style={button}> 
+         <TouchableOpacity onPress = {this.props.onPress} style={button}> 
             <Text style={buttonText}> Login  </Text>
          </TouchableOpacity>  
     )

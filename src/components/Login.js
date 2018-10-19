@@ -7,33 +7,62 @@ import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import { MKTextField, MKColor } from 'react-native-material-kit';
 import Loader from './Loader';
 import Buttons from './Buttons';
+import firebase from 'firebase';
 
-// import {MKTextField, MKColor, MKButton} from 'react-native-material-kit'; does not work 
-// const LoginButton = MKButton.coloredButton().withText('Login').build();
 
 export default class Login extends Component {
   state = {
     email: '', 
     password: '', 
+    error: '',
     loading : false,
   }  
 
-  // onButtonPress=()=> {
-  //   alert('Button is clicked....')
-  // }
+
+   onButtonPress=()=> {
+    console.log('Button is clicked....')
+    // const email  = this.state.email; 
+    const { email, password } = this.state;
+    this.setState({error: '', loading: true});
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(this.onAuthSuccess)
+      .catch(() => {
+          firebase.auth().createUserWithEmailAndPassword(email, password)
+              .then(this.onAuthSuccess)
+              .catch(this.onAuthFailed);
+      });
+  }
+  onAuthSuccess=()=>{
+    this.setState({
+      email: '',
+      password: '',
+      error: '',
+      loading: false, 
+    });
+  }
+
+  
+  onAuthFailed=()=>{
+    this.setState({
+        error: 'Authentication Failed',
+        loading: false,
+    });
+  }
+  //render loader based on state 
 
   renderLoader = () => {
       if(this.state.loading){
-           return <Loader size = "large" />
+          return <Loader size = "large" />
       }else {
-           return <Buttons /> 
+          return <Buttons onPress= {this.onButtonPress} /> 
       }
   }
   render() {
     const {form, fieldStyles, loginButtonArea, errorMessage, welcome, container,button, buttonText} = styles
     return (
       <View style={form}>
-        <Text style={welcome}>Login or Create an account</Text>
+        <Text >Login or Create an account</Text>
         <MKTextField 
            text={this.state.email}
            onTextChange={email => this.setState({email})}
@@ -51,7 +80,6 @@ export default class Login extends Component {
         />
         <Text style ={errorMessage}>{this.state.error} </Text>
         <View style={loginButtonArea}> 
-          {/* <LoginButton onPress = {this.onButtonPress.bind(this)} />  */}
           {this.renderLoader()}
         </View>
 
@@ -84,5 +112,11 @@ const styles = StyleSheet.create({
   loginButtonArea: {
     marginTop:20,
     alignItems: 'center',
+  },
+  errorMessage:{
+    marginTop: 15,
+    fontSize: 15,
+    color: 'red', 
+    alignSelf: 'center',
   },
 });

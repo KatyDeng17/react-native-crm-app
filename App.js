@@ -6,7 +6,6 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 
 import firebase from 'firebase';
 import Login from './src/components/Login';
-// import Login from './src/components/LoginTest';
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,7 +17,6 @@ import Login from './src/components/Login';
 type Props = {};
 export default class App extends Component<Props> {
   //connecting to firebase:
- 
     componentWillMount(){
       
       firebase.initializeApp({
