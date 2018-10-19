@@ -18,7 +18,9 @@ import Login from './src/components/Login';
 type Props = {};
 export default class App extends Component<Props> {
   //connecting to firebase:
+ 
     componentWillMount(){
+      
       firebase.initializeApp({
         apiKey: "AIzaSyAs45Z-nz500xR5kTzNhUbpigkM8jFf_IQ",
         authDomain: "crm-app-534fe.firebaseapp.com",
@@ -31,7 +33,6 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to CRM</Text>
         <Login /> 
       </View>
     );
@@ -45,14 +46,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  // instructions: {
-  //   textAlign: 'center',
-  //   color: '#333333',
-  //   marginBottom: 5,
-  // },
+
+
 });

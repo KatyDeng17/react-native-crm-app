@@ -4,21 +4,12 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 
-// import {MKTextField, MKColor, MKButton} from 'react-native-material-kit';
+// import {MKTextField, MKColor, MKButton} from 'react-native-material-kit'; does not work 
 import { MKTextField, MKColor } from 'react-native-material-kit';
-
-
-
-
 
 // const LoginButton = MKButton.coloredButton().withText('Login').build();
 
-// const LoginButton = MKButton.coloredButton()
-//     .withText('LOGIN')
-//     .build();
-
-type Props = {};
-export default class Login extends Component<Props> {
+export default class Login extends Component {
   state = {
     email: '', 
     password: '', 
@@ -29,7 +20,7 @@ export default class Login extends Component<Props> {
   }
 
   render() {
-    const {form, fieldStyles, loginButtonArea, errorMessage, welcome, container, buttonText} = styles
+    const {form, fieldStyles, loginButtonArea, errorMessage, welcome, container,button, buttonText} = styles
     return (
       <View style={container}>
         <Text style={welcome}>Welcome to CRM</Text>
@@ -50,8 +41,8 @@ export default class Login extends Component<Props> {
         />
         <Text style ={errorMessage}>{this.state.error} </Text>
         <View style={loginButtonArea}> 
-          {/* <LoginButton onPress = {this.onButtonPress.bind(this)} /> */}
-          <TouchableOpacity onPress = {this.onButtonPress} > 
+          {/* <LoginButton onPress = {this.onButtonPress.bind(this)} />  */}
+          <TouchableOpacity onPress = {this.onButtonPress} style={button}> 
             <Text style={buttonText}> Login Button </Text>
           </TouchableOpacity> 
         </View>
@@ -84,14 +75,21 @@ const styles = StyleSheet.create({
   },
   loginButtonArea: {
     marginTop:20,
+  },
+  button:{
     backgroundColor:'pink',
     padding: 15,
-    borderRadius: 10, 
+    borderRadius: 10,
+    shadowOffset:{width:1, height:2},
+    shadowColor:"gray", 
+    shadowOpacity: .6
 
   },
   buttonText:{
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 15
+    fontSize: 15,
+   
+
   }
 });
