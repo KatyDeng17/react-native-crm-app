@@ -9,12 +9,11 @@ export default class Buttons extends Component {
     const {button, buttonText} = styles
     return(
          <TouchableOpacity onPress = {this.onButtonPress} style={button}> 
-            <Text style={buttonText}> Login Button </Text>
+            <Text style={buttonText}> Login  </Text>
          </TouchableOpacity>  
     )
   }
 }
-
 
 const styles = StyleSheet.create({
 
@@ -24,15 +23,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     shadowOffset:{width:1, height:2},
     shadowColor:"gray", 
-    shadowOpacity: .6
+    shadowOpacity: .6,
+    alignItems: 'center',
+    width: 100,
+
 
   },
   buttonText:{
     color: 'white',
     fontWeight: 'bold',
     fontSize: 15,
-   
-
   }
 });
 

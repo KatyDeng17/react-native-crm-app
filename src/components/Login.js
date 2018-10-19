@@ -32,7 +32,7 @@ export default class Login extends Component {
   render() {
     const {form, fieldStyles, loginButtonArea, errorMessage, welcome, container,button, buttonText} = styles
     return (
-      <View style={container}>
+      <View style={form}>
         <Text style={welcome}>Login or Create an account</Text>
         <MKTextField 
            text={this.state.email}
@@ -52,9 +52,6 @@ export default class Login extends Component {
         <Text style ={errorMessage}>{this.state.error} </Text>
         <View style={loginButtonArea}> 
           {/* <LoginButton onPress = {this.onButtonPress.bind(this)} />  */}
-          {/* <TouchableOpacity onPress = {this.onButtonPress} style={button}> 
-            <Text style={buttonText}> Login Button </Text>
-          </TouchableOpacity>  */}
           {this.renderLoader()}
         </View>
 
@@ -86,21 +83,6 @@ const styles = StyleSheet.create({
   },
   loginButtonArea: {
     marginTop:20,
+    alignItems: 'center',
   },
-  button:{
-    backgroundColor:'pink',
-    padding: 15,
-    borderRadius: 10,
-    shadowOffset:{width:1, height:2},
-    shadowColor:"gray", 
-    shadowOpacity: .6
-
-  },
-  buttonText:{
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 15,
-   
-
-  }
 });
