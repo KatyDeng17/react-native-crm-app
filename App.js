@@ -2,12 +2,14 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-
+import {Provider} from 'react-redux'; 
+import {createStore} from 'redux';
 
 import firebase from 'firebase';
 import Login from './src/components/Login';
 import Loader from './src/components/Loader';
 import PeopleList from './src/components/PeopleList';
+import reducers from  './src/reducers/PeopleReducer'
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -16,8 +18,8 @@ import PeopleList from './src/components/PeopleList';
 //     'Shake or press menu button for dev menu',
 // });
 
-type Props = {};
-export default class App extends Component<Props> {
+const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+export default class App extends Component{
   state = { 
     loggedIn: null,
   }
@@ -56,9 +58,11 @@ export default class App extends Component<Props> {
     }
   render() {
     return (
-      <View style={styles.container}>
-       {this.renderInitialView()}
-      </View>
+      <Provider store = {store} > 
+          <View style={styles.container}>
+          {this.renderInitialView()}
+          </View>
+      </Provider> 
     );
   }
 }
