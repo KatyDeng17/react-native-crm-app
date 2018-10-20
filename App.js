@@ -6,6 +6,8 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 
 import firebase from 'firebase';
 import Login from './src/components/Login';
+import Loader from './src/components/Loader';
+import PeopleList from './src/components/PeopleList';
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -16,6 +18,9 @@ import Login from './src/components/Login';
 
 type Props = {};
 export default class App extends Component<Props> {
+  state = { 
+    loggedIn: null,
+  }
   //connecting to firebase:
     componentWillMount(){
       
@@ -26,12 +31,33 @@ export default class App extends Component<Props> {
         projectId: "crm-app-534fe",
         storageBucket: "",
         messagingSenderId: "770405435492"
-      })
+      }); 
+      firebase.auth().onAuthStateChanged((user)=>{
+        if(user){
+          this.setState({
+            loggedIn: true
+          })}
+          else{
+            this.setState({
+              loggedIn:false
+            })
+          }
+      });
+    }
+    renderInitialView(){
+      switch (this.state.loggedIn){
+        case true:
+           return <PeopleList />
+        case false: 
+           return <Login /> 
+        default: 
+           return <Loader size = 'large' />
+      }
     }
   render() {
     return (
       <View style={styles.container}>
-        <Login /> 
+       {this.renderInitialView()}
       </View>
     );
   }
